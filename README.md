@@ -1,29 +1,41 @@
-## datepickerって何がいい？？
+## pickadate.jsのdatepickerとtimepickerを使って予約フォームを作る
+前回datepickerのライブラリ**pickadate.js**を紹介しました。
+[UIのイケているdatepickerライブラリpickadate.jsが最高だった（demo有）](https://qiita.com/Yuta_Fujiwara/items/e80fb931af623bd8e73e)
 
-昨年末からWebアプリケーションを作成していて、dateapickerの機能が必要になり、どのライブラリを使おうかと、色々と調べていたところ、pickadate.jsのdatepickerが最高だったので、概要と簡単な使い方を共有したいと思います。
+pickadate.jsのライブラリを使えば格好いいカレンダー(datepicker)と合わせて、時間選択(timepicker)のライブラリもあるので、日付と時間を指定する予約フォームなどの実装に使えたりします。
 
-### datepickerライブラリのまとめ
-[結局、どのdatepickerが一番使い勝手がよいのか]
-(https://qiita.com/knt45/items/6d74f6785cd4547ae53b) - @knt45 さん
-※参考にさせてもらいました:bow_tone2: 
+僕は勤怠管理のアプリケーションを作り、カレンダーで選択した時間の出勤時間と退勤時間を編集する機能でpickadate.jsのライブラリを使わせてもらっています...:bow_tone2:
+
 
 ## pickadate.jsの概要
-<img width="926" alt="スクリーンショット 2018-01-12 7.53.16.png" src="https://qiita-image-store.s3.amazonaws.com/0/147291/e69f75d7-644a-d52d-1423-d2118c399463.png">
-【実装できるdatepicker】
-<img width="848" alt="スクリーンショット 2018-01-12 7.53.03.png" src="https://qiita-image-store.s3.amazonaws.com/0/147291/39ff180e-958e-1a33-30ad-c0e0c7f4801f.png">
 
-### インストール
+### オフィシャルページ
 [pickadate.js](http://amsul.ca/pickadate.js/)
+### pickadate.jsリファレンス
+[datepickerリファレンス](http://amsul.ca/pickadate.js/date/)
+[timepickerリファレンス](http://amsul.ca/pickadate.js/time/)
 
-インストールを実行すると以下のファイル群がインストールされ、その中から以下のjsファイルと、cssファイルを読み込ませます。
-![スクリーンショット-2018-01-12-8.03.09.jpg](https://qiita-image-store.s3.amazonaws.com/0/147291/7a51a16e-96ea-cbb9-e89e-88f03d1adf0e.jpeg)
+使い方・概要は以下の記事にまとめてあります。
+[UIのイケているdatepickerライブラリpickadate.jsが最高だった（demo有）](https://qiita.com/Yuta_Fujiwara/items/e80fb931af623bd8e73e)
+
+オフィシャルページよりファイルをインストールして、以下のファイルを読み込みます。
+![予約.jpg](https://qiita-image-store.s3.amazonaws.com/0/147291/04bba0c2-64c1-a139-f827-50d983e65cfb.jpeg)
+
+【datepickerイメージ】
+<img width="865" alt="スクリーンショット 2018-01-14 11.42.22.png" src="https://qiita-image-store.s3.amazonaws.com/0/147291/85b98d9b-1b43-eb24-97aa-898118f56d8d.png">
+
+【timepickerイメージ】
+<img width="1036" alt="スクリーンショット 2018-01-14 11.41.34.png" src="https://qiita-image-store.s3.amazonaws.com/0/147291/c5a6c966-de85-2c94-7134-0d1d8c0b584a.png">
 
 
-## pickadate.jsデモ
-### デフォルトdatepickerデモ
-![ezgif-4-cd54cb2f48.gif](https://qiita-image-store.s3.amazonaws.com/0/147291/9198111b-0c6f-8b75-a4d0-9a4be9b7af46.gif)
+## pickadate.jsを使った予約ページのデモ
+【OK】
+![予約_OK.gif](https://qiita-image-store.s3.amazonaws.com/0/147291/8b63f182-4994-96ab-952e-cf2ca43f657b.gif)
 
-``` HTML:index.html
+【NG】
+![予約_NG.gif](https://qiita-image-store.s3.amazonaws.com/0/147291/83d27cc8-37bb-4ec7-ed76-b62df0ba2403.gif)
+
+``` HTML:index.html 
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,65 +46,94 @@
 <link rel="stylesheet" href="assets/css/main.css">
 <link rel="stylesheet" href="assets/css/default.css">
 <link rel="stylesheet" href="assets/css/default.date.css">
+<link rel="stylesheet" href="assets/css/default.time.css">
 <!-- クラクシック版 -->
 <!-- <link rel="stylesheet" href="assets/css/classic.css">
-<link rel="stylesheet" href="assets/css/classic.date.css"> -->
+<link rel="stylesheet" href="assets/css/classic.date.css">
+<link rel="stylesheet" href="assets/css/classic.time.css"> -->
  
 <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
 <script src="assets/pickadate/picker.js"></script>
 <script src="assets/pickadate/picker.date.js"></script>
+<script src="assets/pickadate/picker.time.js"></script>
 <script src="assets/pickadate/legacy.js"></script>
 <script src="assets/pickadate/lang-ja.js"></script>  <!-- 日本語化 -->
 <script src="assets/js/main.js"></script>
  
 </head>
-  <body>
-    <section class="section">
-      <div class="section__block section__block--scoped">
-        <h3>demo</h3>                  
-        <fieldset class="fieldset fieldset--demo">
-          <div class="fieldset__wrapper">
-            <input id="demo" class="fieldset__input js__datepicker" type="text" placeholder="Try me&hellip;">
-          </div>
-        </fieldset>
-      </div>
-    </section>
-  </body>
+<body>
+  <section class="section">
+    <div class="section__block section__block--scoped">
+      <h3>pickadate.js 予約ページdemo</h3>                  
+      <fieldset class="fieldset fieldset--demo">
+        <div class="fieldset__wrapper">
+          <label> ■予約日　 </label></br>              
+          <input id='date' class="fieldset__input js__datepicker" type="text" placeholder="Try me&hellip;"></br></br>
+          <label> ■予約時間　</label></br>            
+          <input id='time' class="fieldset__input js__datepicker" type="text" placeholder="Try me&hellip;"></br></br>
+          <button id="submit" class="fieldset__button button button--small">予約</button>
+        </div>    
+        <div id="result"></div>      <!-- ボタン押下の結果を表示する -->   
+      </fieldset>
+    </div>
+  </section>
+</body>
 </html>
+
 ```
 
 ``` javascript:main.js
 $(function() {
-    $('#demo').pickadate();
+    
+    // datepicker表示イベント
+    $('#date').pickadate();
+
+    // timepicker表示イベント
+    $('#time').pickatime({
+        format: 'HH:i', // 24時間表記
+        interval: 30,   // 表示間隔
+        min: [10,00],   // 予約開始時間
+        max: [20,00]    // 予約終了時間 
+    });
+
+    // 予約ボタン押下イベント
+    $('#submit').click(onClickSubmit);
+
+    //予約ボタン押下処理
+    function onClickSubmit(){
+        $('#submit_result').remove();
+        var date = $('#date').val();
+        var time = $('#time').val();
+        
+        if(date!='' && time !=''){
+
+            // TODO 予約をサーバに送信
+            // params={};
+            // prams.date=date;
+            // params.time=time;
+            // $.post("hoge.php",params,function(data){
+                // ここにサーバ送信後の処理結果を書く
+            // });
+
+            //予約完了メッセージ
+            $('#result').after('<div id="submit_result" class="section__block section__block--notification"><p><strong>'+date+time+'〜</strong><br>予約受け付けました。</p></div>');            
+
+        }else{
+            //予約失敗メッセージ
+            $('#result').after('<div id="submit_result" class="section__block section__block--notification-red"><p>予約日・予約時間を選択してください。</p></div>');            
+        }
+    }
+
 });
-```
-### 日本語対応datepicker
-![ezgif-4-14c1ef3061.gif](https://qiita-image-store.s3.amazonaws.com/0/147291/ca2513ef-2897-05eb-42a1-f19ad0121770.gif)
 
-日本語化したい方は以下のjsファイルを読み込ませれば、日本語のdatepickerが出力できます。フォーマット等もかなり自分ようにカスタマイズすることができます。
-
-``` javascript:lamg-ja.js
-jQuery.extend( jQuery.fn.pickadate.defaults, {
-    monthsFull: [ '1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月' ],
-    monthsShort: [ '1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月' ],
-    weekdaysFull: [ '日曜' , '月曜', '火曜', '水曜', '木曜', '金曜', '土曜'],
-    weekdaysShort: [ '日曜' ,  '月曜', '火曜', '水曜', '木曜', '金曜', '土曜'],
-    today: '本日',
-    clear: 'キャンセル',
-    format: 'yyyy年mm月dd日'
-});
 ```
 
-ライブラリの詳しい使い方については、オフィシャルのHPにも記載されているので、参考にしてみください。
+
 
 
 ## デモページ & Github
-### デモペーシ
-[http://tech-portfolio.org/demo/pickadate](http://tech-portfolio.org/demo/pickadate)
-### Github（ソース）
-[https://github.com/FujiyamaYuta/pickadate_demo](https://github.com/FujiyamaYuta/pickadate_demo)
+### デモページ
+http://tech-portfolio.org/demo/pickadate
 
-
-#### 参考
-[JQueryプラグインまとめ](https://webkaru.net/jquery-plugin/pickadate-js/)
-[【pickadate.js】シンプルだけど高機能な日付カレンダー編](https://dev.classmethod.jp/ria/html5/pickadate-jsdate-picker/)
+### Github
+https://github.com/FujiyamaYuta/pickadate_booking
